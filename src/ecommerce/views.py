@@ -25,8 +25,7 @@ def contact_page(request):
     context = {
         "title":"Contact Page!",
         "content": "Welcome to the contact page",
-        "form": contact_form
-
+        "form": contact_form,
     }
     if contact_form.is_valid():
         print(contact_form.cleaned_data)
@@ -34,7 +33,6 @@ def contact_page(request):
     return render(request, "contact/view.html", context)
 
 def login_page(request):
-    # print(request.user.is_authenticated())
     print('user loged in ')
     form = LoginForm(request.POST or None)
     context = {
@@ -46,11 +44,8 @@ def login_page(request):
         password = form.cleaned_data.get("password")
         user = authenticate(request, username=username, password=password)
         print(user)
-        # print(request.user.is_authenticated())
         if user is not None:
-            # print(request.user.is_authenticated())
             login(request,user)
-            # context['form'] = LoginForm()
             # Redirect when login success
             return redirect("/")
         else:
